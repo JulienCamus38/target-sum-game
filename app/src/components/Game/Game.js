@@ -6,6 +6,8 @@ import { sum, sampleSize } from 'lodash';
 
 import Number from '../Number/Number';
 
+import { Animated } from 'react-animated-css';
+
 const randomNumberBetween = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -96,7 +98,7 @@ class Game extends Component {
 
   render() {
     const { gameStatus, remainingSeconds } = this.state;
-    var remainingSecondsStyle = (remainingSeconds < 4) ? "danger" : (remainingSeconds < 8) ? "warning" : "success";
+    var remainingSecondsStyle = (remainingSeconds < 4) ? 'danger' : (remainingSeconds < 8) ? 'warning' : 'success';
 
     return (
       <div className="game">
@@ -105,7 +107,9 @@ class Game extends Component {
         </div>
         <div
           className={"target shadow-lg p-3 mb-5 rounded p-3 mb-2 alert alert-" + colors[gameStatus]}>
-          {gameStatus === 'new' ? '?' : this.target}
+          <div className={gameStatus === 'playing' ? "animated pulse infinite" : ""}>
+            {gameStatus === 'new' ? '?' : this.target}
+          </div>
         </div>
         <div className="challenge-numbers">
           {
@@ -131,7 +135,9 @@ class Game extends Component {
             <div
               className={"timer-value alert alert-" + remainingSecondsStyle}
             >
-              {remainingSeconds}
+              <div className="animated tada infinite">
+                {remainingSeconds}
+              </div>
             </div>
           }
 

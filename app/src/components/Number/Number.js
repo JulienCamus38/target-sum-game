@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './Number.css';
 
-class Number extends Component {
+class Number extends PureComponent {
 
   handleClick = () => {
     if (this.props.clickable) {
       this.props.onClick(this.props.id);
     }
   };
+
+  componentWillUpdate() {
+    console.log('Number Updated');
+  }
 
   render() {
     return (

@@ -16,7 +16,6 @@
   font-size: 45px;
   text-align: center;
   display: inline-block;
-  background-color: lightblue;
 }
 .challenge-numbers {
   width: 100%;
@@ -28,8 +27,7 @@
   justify-content: space-between;  
 }
 .timer-value {
-  color: darkgreen;
-  font-size: 150%;
+  font-size: 120%;
 }
 button:focus {
   outline: none;

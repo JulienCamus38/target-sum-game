@@ -17,7 +17,7 @@ class Number extends PureComponent {
   render() {
     return (
       <div
-        className="number"
+        className="number btn btn-info"
         style={{ opacity: this.props.clickable ? 1 : 0.3 }}
         onClick={this.handleClick}
       >

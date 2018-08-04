@@ -10,10 +10,10 @@ const randomNumberBetween = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
 const colors = {
-  new: 'lightblue',
-  playing: 'deepskyblue',
-  won: 'lightgreen',
-  lost: 'lightcoral',
+  new: 'secondary',
+  playing: 'primary',
+  won: 'success',
+  lost: 'danger'
 };
 
 class Game extends Component {
@@ -96,6 +96,7 @@ class Game extends Component {
 
   render() {
     const { gameStatus, remainingSeconds } = this.state;
+    var remainingSecondsStyle = (remainingSeconds < 4) ? "danger" : (remainingSeconds < 8) ? "warning" : "success";
 
     return (
       <div className="game">
@@ -103,8 +104,7 @@ class Game extends Component {
           Pick {this.props.answerSize} numbers that sum to the target in {this.props.initialSeconds} seconds
         </div>
         <div
-          className="target"
-          style={{ backgroundColor: colors[gameStatus] }}>
+          className={"target shadow-lg p-3 mb-5 rounded p-3 mb-2 alert alert-" + colors[gameStatus]}>
           {gameStatus === 'new' ? '?' : this.target}
         </div>
         <div className="challenge-numbers">
@@ -121,12 +121,25 @@ class Game extends Component {
           }
         </div>
         <div className="footer">
-          {gameStatus === 'new' && <button onClick={this.startGame}>Start</button>}
+          {gameStatus === 'new' && <button
+            className="btn btn-outline-success"
+            onClick={this.startGame}>
+            Start game
+          </button>}
 
           {gameStatus === 'playing' &&
-            <div className="timer-value">{remainingSeconds}</div>}
+            <div
+              className={"timer-value alert alert-" + remainingSecondsStyle}
+            >
+              {remainingSeconds}
+            </div>
+          }
 
-          {['won', 'lost'].includes(gameStatus) && <button onClick={this.props.onPlayAgain}>Play Again</button>}
+          {['won', 'lost'].includes(gameStatus) && <button
+            className="btn btn-outline-success"
+            onClick={this.props.onPlayAgain}>
+            Play Again
+          </button>}
         </div>
       </div>
     );

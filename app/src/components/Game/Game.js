@@ -28,6 +28,13 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    if (this.props.autoPlay) {
+      this.startGame();
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
   }
 
   challengeNumbers = Array.from({
@@ -119,7 +126,7 @@ class Game extends Component {
           {gameStatus === 'playing' &&
             <div className="timer-value">{remainingSeconds}</div>}
 
-          {['won', 'lost'].includes(gameStatus) && <button>Play Again</button>}
+          {['won', 'lost'].includes(gameStatus) && <button onClick={this.props.onPlayAgain}>Play Again</button>}
         </div>
       </div>
     );
@@ -130,7 +137,10 @@ Game.propTypes = {
   challengeSize: PropTypes.number,
   challengeRange: PropTypes.array,
   initialSeconds: PropTypes.number,
-  answerSize: PropTypes.number
+  answerSize: PropTypes.number,
+  gameId: PropTypes.number,
+  autoPlay: PropTypes.bool,
+  onPlayAgain: PropTypes.func
 }
 
 export default Game;

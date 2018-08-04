@@ -5,7 +5,22 @@ import './App.css';
 import Game from './components/Game/Game';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      gameId: 1
+    }
+  }
+
+  resetGame = () =>
+    this.setState((prevState) => ({
+      gameId: prevState.gameId + 1,
+    }));
+
   render() {
+    const { gameId } = this.state;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -14,11 +29,14 @@ class App extends Component {
         </header>
         <p className="App-intro"></p>
         <Game
-            challengeSize={6}
-            challengeRange={[2, 9]}
-            initialSeconds={15}
-            answerSize={4}
-          />
+          key={gameId}
+          autoPlay={gameId > 1}
+          challengeSize={6}
+          challengeRange={[2, 9]}
+          initialSeconds={15}
+          answerSize={4}
+          onPlayAgain={this.resetGame}
+        />
       </div>
     );
   }
